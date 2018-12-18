@@ -64,6 +64,7 @@ module RGhost::Config
     :plugin => nil,
     :path => nil,
     :tmpdir => ENV["TMP"] || ENV["TMPDIR"] || ENV["TEMPDIR"] || ENV["TEMP"] || "/tmp",
+    :timeout => ENV['GS_TIMEOUT'] || 3000,
     :pslibdir => File.join( File.dirname(__FILE__),"ps"),
     :extensions => [],
     :preload => [],
