@@ -12,9 +12,15 @@ class RGhost::GSAlone #:nodoc:
     unless File.exists?(RGhost::Config::GS[:path].to_s)
       RGhost::Config.config_platform
     end
-    r=system("timeout #{RGhost::Config::GS[:timeout].to_i}s #{RGhost::Config::GS[:path]}#{cmd}")
+
+    full_command = "#{RGhost::Config::GS[:path]}#{cmd}"
+    timeout = RGhost::Config::GS[:timeout].to_i
+    if timeout > 0
+      full_command = "timeout #{timeout}s #{full_command}"
+    end
+    r=system(full_command)
     
-    puts RGhost::Config::GS[:path]+cmd if @debug
+    puts full_command if @debug
     #puts r
     r
   end
